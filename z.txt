@@ -182,6 +182,7 @@ git操作本地的指令:
     git status (查看状态,状态有 Untracked files , modified 被修改 , deleted 被删除)
     git add . (添加所有到暂存)
     git commit -m "这里写描述" (存储到本地仓库)
+    git commit -am "xxx" (-a相当于add所有被跟踪的文件了)
 
 SSH: 安全协议
 
@@ -198,6 +199,7 @@ SSH公钥的生成:
     git push -u origin master
 
 平时使用:
-    git add.
-    git commit
-    git push
+    git add .
+    git commit -m "xxx"
+    git remote add origin https://gitee.com/juln/test.git
+    git push -u origin master
