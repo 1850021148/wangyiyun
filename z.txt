@@ -1,0 +1,203 @@
+BetterScroll
+    slide
+    slide-wrapper
+    item
+    import BScroll from '@better-scroll/core'
+    import Slide from '@better-scroll/slide'
+    BScroll.use(Slide)
+    基础轮播
+        init(){
+            this.slide = new BScroll(slide节点,{
+                scrollX: true,
+                scrollY: false,
+                slide: {
+                    loop: true,
+                    threshold: 100,
+                },
+                useTransition: true,
+                momentum: false,
+                bounce: false,
+                stopPropagation: true,
+                probeType: 2
+            })
+        }
+    自动轮播
+        autoNext(){
+            clearTimeout(this.playTimer)
+            this.playTimer = setTimeout(()=>{
+                this.slide.next()
+            },400)
+        }
+        this.slide.on('srcollEnd',()=>{
+            this.autoNext()
+        })
+        this.slide.on('beforeScrollStart',()=>{
+            clearTimeout(this.playTimer)
+        })
+        this.slide.on('touchEnd',()=>{ // 避免单击不滑动
+            this.autoNext()
+        })
+        autoNext()
+    获取当前页数,制作页码圆点
+        this.slide.on('slideWillChange',(page)=>{
+
+        })
+
+watch主要用于检测axios和$route
+
+keep-alive主要用于缓存路由
+<keep-alive :exclude="/playMusic/"></keep-alive>
+exclude或include,组件名,可用正则
+
+vue-lazyload
+    npm i vue-lazyload -S
+    Vue.use(VueLazyload,{
+        preLoad: 1.3, // 预载高度比例,默认1.3
+        error: 'xx.png',
+        loading: 'xx.png',
+        attempt: 1, // 尝试次数
+    })
+    <img v-lazy='xxx.png' /> // 图片出现在屏幕上才加载
+    data-src=''
+    data-error=''
+    data-loading=''
+    v-lazy-container="{ selector: 'img', error: 'xxx.jpg', loading: 'xxx.jpg' }"
+
+axios.all
+    var me = this; 
+    this.$axios.all([me.getAllTask(),me.getAllCity()])
+    .then(me.$axios.spread(function(allTask, allCity){
+        console.log('所有请求完成')
+        console.log('请求1结果',allTask)
+        console.log('请求2结果',allCity)
+
+    }))
+
+
+路由跳转: this.$router.push( 路由 )
+
+vuex:
+    基础用法:
+        Vue.use(vuex)
+        const store = new vuex.Store({
+            state: { // 相当于vue的data
+                id: '1'
+            },
+            mutations: { // 相当于vue的methods,无法执行异步请求
+                add(state,num){
+                    state.id += num
+                }
+            },
+        })
+        new Vue({
+            store
+        })
+        getter: let id = this.$store.state.id
+        setter: this.$store.commit('add',2)
+    mapMutations:
+        const { mapMutations } from 'vuex'
+        // 映射
+        methods: {
+            ...mapMutations(['add'])
+        }
+        this.add(1801130161)
+    mapState:
+        const { mapState } from 'vuex'
+        computed: {
+            ...mapState(['id'])
+        }
+        this.id
+
+vue-router路由跳转
+    this.$router.push('./play')
+
+歌词解析包(lyric-parser):
+    Install:
+        npm install lyric-parser
+    Usage:
+        import Lyric from 'lyric-parser'
+        let lyric = new Lyric(lyricStr, ({lineNum, txt}) => {
+            console.log(lineNum,txt)
+        })
+    API(lyric.xxx):
+        play()
+        stop()
+        seek(startTime)
+        togglePlay()
+
+style防vue渲染闪烁:
+    防止vue渲染过慢,{{ xxx }}等内部结构直接被浏览器渲染到页面上
+    标签加个属性v-cloak,如 <div v-cloak></div>
+    [v-cloak] {
+        display: none;
+    }
+
+window刷新前事件
+    window.addEventListener('beforeunload', () => {
+        
+    })
+
+sessionStorage:
+    sessionStorage.setItem('store', JSON.stringify(this.$store.state) )
+    sessionStorage.getItem('store')
+
+this.$store.replaceState( 对象 )
+
+对象替换/克隆
+    Object.assign( 对象1 , 对象2 ) // 返回修改后的对象1
+    kel: 
+        let a = { name: 'juln' }
+        let newObj = Object.assign( {}, a )
+        newObj === a // true
+
+range进度条:
+    this.$refs.range.style.background=`linear-gradient(to right, red 0%,  #ccc ${this.$refs.range.value}%)`
+
+audio:
+    audio.onloadedmetadata // 数据全部加载完全
+    audio.ontimeupdate
+    
+this.$router.push
+this.$router.replace
+this.$router.go(-2) 上上个历史记录
+都跟历史记录有关
+
+
+
+
+================= git =================
+
+git原理: 本地文件 => 本地暂存 => 本地仓库 => 云端
+
+README.md
+
+.gitIgnore文件
+    node_modiles
+    .git (git初始化的内容)
+    .vscode
+    .idea
+
+git操作本地的指令:
+    git init (以便于被git追踪)
+    git status (查看状态,状态有 Untracked files , modified 被修改 , deleted 被删除)
+    git add . (添加所有到暂存)
+    git commit -m "这里写描述" (存储到本地仓库)
+
+SSH: 安全协议
+
+SSH公钥的生成:
+    cmd: ssh-keygen -t rsa -C "1850021148@qq.com"
+    公钥: C:\Users\86153\.ssh\id_rsa.pub
+
+本地配置用户:
+    git config --global user.name "juln"
+    git config --global user.email "1850021148@qq.com"
+
+上传:
+    git remote add origin https://gitee.com/juln/test.git
+    git push -u origin master
+
+平时使用:
+    git add.
+    git commit
+    git push
