@@ -203,3 +203,95 @@ SSH公钥的生成:
     git commit -m "xxx"
     git remote add origin https://gitee.com/juln/test.git
     git push -u origin master
+    git push
+
+------------------------
+
+china.js
+myMap.js
+flexible.js
+echart.js
+jquery.js
+
+---------------echart.js-----------------
+
+柱状,多条折线,饼图
+
+基础知识看./images/echart.png
+
+let box = document.body
+
+let myChart = echart.init(box)
+
+// 基础配置
+let option = {
+    title: {
+        text: '',
+    },
+    grid: {
+        left: '20%',
+        right: '20%',
+        top: '10%',
+        bottom: '10%',
+        containLabel: true,
+    },
+    toolTip: {
+        trigger: 'axis', // 鼠标悬停则提示的区域 'item'
+    },
+    xAxis: {
+        axiosLine: {
+            show: false
+        },
+        axiosTick: {
+            show: false
+        },
+        axiosLabel: {
+            textStyle: {
+                normal: {
+                    color: 'black',
+                    fontSize: 13,
+                },
+            }
+        },
+    },
+    yAxis: {
+        splitLine: {
+            lineStyle: {
+                color: 'red',
+                width: 3,
+            }
+        }
+    },
+    // 数据
+    series: [{
+        data: [120,110,120],
+        type: 'bar',
+        showBackground: true,
+        barWidth: '50%',
+        itemStyle: {
+            color: echart.graphic.LinearGradient( 0, 0, 0, 1 [
+                {
+                    offset: 0, // 占的比例
+                    color: 'yellow',
+                },
+                {
+                    offset: 0.5,
+                    color: 'blue',
+                }
+            ]),
+            barBorderRadius: [5,5,0,0]
+        },
+    }]
+}
+
+myChart.setOption(option)
+
+// 响应式
+myChart.addEventListener('resize', () => {
+    myChart.resize()
+})
+
+--------------------------------
+
+ssr
+nuxt.js

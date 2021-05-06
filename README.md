@@ -1,5 +1,8 @@
 # music
 
+## api的启动
+使用的是NeteaseCloudMusicApi, 需要自行去下载并启动
+
 ## Project setup
 ```
 npm install
